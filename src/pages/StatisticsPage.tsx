@@ -130,7 +130,7 @@ export default function StatisticsPage({ onNavigate }: StatisticsPageProps) {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
         <Navbar currentPage="statistics" onNavigate={onNavigate} />
         <div className="flex items-center justify-center h-96">
           <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-500"></div>
@@ -140,14 +140,14 @@ export default function StatisticsPage({ onNavigate }: StatisticsPageProps) {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <Navbar currentPage="statistics" onNavigate={onNavigate} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex justify-between items-center mb-8">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Statistik & Laporan</h1>
-            <p className="text-gray-600 mt-2">
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Statistik & Laporan</h1>
+            <p className="text-gray-600 dark:text-gray-400 mt-2">
               Analisis data pengaduan masyarakat
             </p>
           </div>
@@ -161,60 +161,60 @@ export default function StatisticsPage({ onNavigate }: StatisticsPageProps) {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <div className="bg-white p-6 rounded-xl shadow-md">
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md">
             <div className="flex items-center justify-between mb-4">
-              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                <BarChart3 className="h-6 w-6 text-blue-600" />
+              <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
+                <BarChart3 className="h-6 w-6 text-blue-600 dark:text-blue-400" />
               </div>
             </div>
-            <p className="text-sm font-medium text-gray-600 mb-1">Total Laporan</p>
-            <p className="text-4xl font-bold text-gray-900">{totalComplaints}</p>
+            <p className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">Total Laporan</p>
+            <p className="text-4xl font-bold text-gray-900 dark:text-white">{totalComplaints}</p>
           </div>
 
-          <div className="bg-white p-6 rounded-xl shadow-md">
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md">
             <div className="flex items-center justify-between mb-4">
-              <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-                <TrendingUp className="h-6 w-6 text-green-600" />
+              <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
+                <TrendingUp className="h-6 w-6 text-green-600 dark:text-green-400" />
               </div>
             </div>
-            <p className="text-sm font-medium text-gray-600 mb-1">
+            <p className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">
               Tingkat Penyelesaian
             </p>
-            <p className="text-4xl font-bold text-gray-900">
+            <p className="text-4xl font-bold text-gray-900 dark:text-white">
               {resolutionRate.toFixed(1)}%
             </p>
           </div>
 
-          <div className="bg-white p-6 rounded-xl shadow-md">
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md">
             <div className="flex items-center justify-between mb-4">
-              <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
-                <PieChart className="h-6 w-6 text-purple-600" />
+              <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center">
+                <PieChart className="h-6 w-6 text-purple-600 dark:text-purple-400" />
               </div>
             </div>
-            <p className="text-sm font-medium text-gray-600 mb-1">Kategori Aktif</p>
-            <p className="text-4xl font-bold text-gray-900">
+            <p className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-1">Kategori Aktif</p>
+            <p className="text-4xl font-bold text-gray-900 dark:text-white">
               {categoryStats.length}
             </p>
           </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-          <div className="bg-white rounded-xl shadow-md p-6">
-            <h2 className="text-xl font-bold text-gray-900 mb-6">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+            <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-6">
               Laporan per Kategori
             </h2>
             <div className="space-y-4">
               {categoryStats.map((stat, index) => (
                 <div key={stat.category}>
                   <div className="flex justify-between items-center mb-2">
-                    <span className="text-sm font-medium text-gray-700">
+                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                       {stat.category}
                     </span>
-                    <span className="text-sm font-semibold text-gray-900">
+                    <span className="text-sm font-semibold text-gray-900 dark:text-white">
                       {stat.count} ({stat.percentage.toFixed(1)}%)
                     </span>
                   </div>
-                  <div className="w-full bg-gray-200 rounded-full h-3">
+                  <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3">
                     <div
                       className={`${getCategoryColor(index)} h-3 rounded-full transition-all duration-500`}
                       style={{ width: `${stat.percentage}%` }}
@@ -225,8 +225,8 @@ export default function StatisticsPage({ onNavigate }: StatisticsPageProps) {
             </div>
           </div>
 
-          <div className="bg-white rounded-xl shadow-md p-6">
-            <h2 className="text-xl font-bold text-gray-900 mb-6">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+            <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-6">
               Status Laporan
             </h2>
             <div className="space-y-4">
@@ -236,14 +236,14 @@ export default function StatisticsPage({ onNavigate }: StatisticsPageProps) {
                 return (
                   <div key={stat.status}>
                     <div className="flex justify-between items-center mb-2">
-                      <span className="text-sm font-medium text-gray-700">
+                      <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                         {stat.status}
                       </span>
-                      <span className="text-sm font-semibold text-gray-900">
+                      <span className="text-sm font-semibold text-gray-900 dark:text-white">
                         {stat.count} ({percentage.toFixed(1)}%)
                       </span>
                     </div>
-                    <div className="w-full bg-gray-200 rounded-full h-3">
+                    <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3">
                       <div
                         className={`${getStatusColor(stat.status)} h-3 rounded-full transition-all duration-500`}
                         style={{ width: `${percentage}%` }}
@@ -256,8 +256,8 @@ export default function StatisticsPage({ onNavigate }: StatisticsPageProps) {
           </div>
         </div>
 
-        <div className="bg-white rounded-xl shadow-md p-6">
-          <h2 className="text-xl font-bold text-gray-900 mb-6">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 mb-8">
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-6">
             Tingkat Prioritas
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -274,14 +274,14 @@ export default function StatisticsPage({ onNavigate }: StatisticsPageProps) {
                       {percentage.toFixed(1)}%
                     </p>
                   </div>
-                  <p className="font-semibold text-gray-900">{stat.priority}</p>
+                  <p className="font-semibold text-gray-900 dark:text-white">{stat.priority}</p>
                 </div>
               );
             })}
           </div>
         </div>
 
-        <div className="bg-gradient-to-r from-emerald-500 to-teal-500 rounded-xl shadow-md p-8 mt-8 text-white">
+        <div className="bg-gradient-to-r from-emerald-500 to-teal-500 rounded-xl shadow-md p-8 text-white">
           <div className="flex items-start justify-between">
             <div>
               <h3 className="text-2xl font-bold mb-2">Ringkasan</h3>

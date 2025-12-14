@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import {
   ArrowLeft,
   Calendar,
-  User,
   Tag,
   AlertCircle,
   Send,
@@ -148,14 +147,14 @@ export default function ComplaintDetail({
                 className={`w-10 h-10 rounded-full flex items-center justify-center ${
                   index <= currentIndex
                     ? 'bg-emerald-500 text-white'
-                    : 'bg-gray-200 text-gray-500'
+                    : 'bg-gray-200 dark:bg-gray-600 text-gray-500 dark:text-gray-400'
                 }`}
               >
                 {index < currentIndex ? '✓' : index + 1}
               </div>
               <span
                 className={`text-xs mt-2 font-medium ${
-                  index <= currentIndex ? 'text-emerald-600' : 'text-gray-400'
+                  index <= currentIndex ? 'text-emerald-600 dark:text-emerald-400' : 'text-gray-400 dark:text-gray-500'
                 }`}
               >
                 {status}
@@ -164,7 +163,7 @@ export default function ComplaintDetail({
             {index < statuses.length - 1 && (
               <div
                 className={`flex-1 h-1 -mx-2 ${
-                  index < currentIndex ? 'bg-emerald-500' : 'bg-gray-200'
+                  index < currentIndex ? 'bg-emerald-500' : 'bg-gray-200 dark:bg-gray-600'
                 }`}
               />
             )}
@@ -175,7 +174,7 @@ export default function ComplaintDetail({
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <Navbar
         currentPage={profile?.role === 'admin' ? 'all-complaints' : 'my-complaints'}
         onNavigate={onNavigate}
@@ -186,19 +185,19 @@ export default function ComplaintDetail({
           onClick={() =>
             onNavigate(profile?.role === 'admin' ? 'all-complaints' : 'dashboard')
           }
-          className="flex items-center space-x-2 text-gray-600 hover:text-gray-900 mb-6"
+          className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white mb-6 transition-colors"
         >
           <ArrowLeft className="h-5 w-5" />
           <span>Kembali</span>
         </button>
 
-        <div className="bg-white rounded-xl shadow-md p-8 mb-6">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-8 mb-6">
           <div className="flex justify-between items-start mb-6">
             <div className="flex-1">
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
                 {complaint.title}
               </h1>
-              <div className="flex flex-wrap gap-3 text-sm text-gray-600">
+              <div className="flex flex-wrap gap-3 text-sm text-gray-600 dark:text-gray-400">
                 <span className="flex items-center">
                   <Calendar className="h-4 w-4 mr-1" />
                   {formatDate(complaint.created_at)}
@@ -218,15 +217,15 @@ export default function ComplaintDetail({
           {getStatusTimeline()}
 
           <div className="prose max-w-none mb-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
               Deskripsi Masalah
             </h3>
-            <p className="text-gray-700 whitespace-pre-wrap">{complaint.description}</p>
+            <p className="text-gray-700 dark:text-gray-300 whitespace-pre-wrap">{complaint.description}</p>
           </div>
 
           {complaint.image_url && (
             <div className="mb-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Foto Bukti</h3>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Foto Bukti</h3>
               <img
                 src={complaint.image_url}
                 alt="Bukti laporan"
@@ -236,8 +235,8 @@ export default function ComplaintDetail({
           )}
         </div>
 
-        <div className="bg-white rounded-xl shadow-md p-8">
-          <h2 className="text-xl font-bold text-gray-900 mb-6">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-8">
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-6">
             Diskusi & Tanggapan
           </h2>
 
@@ -247,8 +246,8 @@ export default function ComplaintDetail({
             </div>
           ) : comments.length === 0 ? (
             <div className="text-center py-8">
-              <AlertCircle className="h-12 w-12 text-gray-300 mx-auto mb-2" />
-              <p className="text-gray-600">Belum ada komentar</p>
+              <AlertCircle className="h-12 w-12 text-gray-300 dark:text-gray-600 mx-auto mb-2" />
+              <p className="text-gray-600 dark:text-gray-400">Belum ada komentar</p>
             </div>
           ) : (
             <div className="space-y-4 mb-6">
@@ -257,8 +256,8 @@ export default function ComplaintDetail({
                   key={comment.id}
                   className={`p-4 rounded-lg ${
                     comment.users.role === 'admin'
-                      ? 'bg-emerald-50 border-l-4 border-emerald-500'
-                      : 'bg-gray-50'
+                      ? 'bg-emerald-50 dark:bg-emerald-900/20 border-l-4 border-emerald-500 dark:border-emerald-400'
+                      : 'bg-gray-50 dark:bg-gray-700/50'
                   }`}
                 >
                   <div className="flex items-start space-x-3">
@@ -266,14 +265,14 @@ export default function ComplaintDetail({
                       className={`w-10 h-10 rounded-full flex items-center justify-center ${
                         comment.users.role === 'admin'
                           ? 'bg-emerald-500'
-                          : 'bg-gray-400'
+                          : 'bg-gray-400 dark:bg-gray-600'
                       } text-white font-semibold`}
                     >
                       {comment.users.full_name.charAt(0).toUpperCase()}
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center space-x-2 mb-1">
-                        <span className="font-semibold text-gray-900">
+                        <span className="font-semibold text-gray-900 dark:text-white">
                           {comment.users.full_name}
                         </span>
                         {comment.users.role === 'admin' && (
@@ -281,12 +280,12 @@ export default function ComplaintDetail({
                             Admin
                           </span>
                         )}
-                        <span className="text-xs text-gray-500 flex items-center">
+                        <span className="text-xs text-gray-500 dark:text-gray-400 flex items-center">
                           <Clock className="h-3 w-3 mr-1" />
                           {formatDate(comment.created_at)}
                         </span>
                       </div>
-                      <p className="text-gray-700 whitespace-pre-wrap">
+                      <p className="text-gray-700 dark:text-gray-300 whitespace-pre-wrap">
                         {comment.message}
                       </p>
                     </div>
@@ -299,7 +298,7 @@ export default function ComplaintDetail({
           <form onSubmit={handleSubmitComment} className="mt-6">
             <div className="flex space-x-3">
               <div
-                className="w-10 h-10 rounded-full bg-gray-400 flex items-center justify-center text-white font-semibold flex-shrink-0"
+                className="w-10 h-10 rounded-full bg-gray-400 dark:bg-gray-600 flex items-center justify-center text-white font-semibold flex-shrink-0"
               >
                 {profile?.full_name.charAt(0).toUpperCase()}
               </div>
@@ -307,7 +306,7 @@ export default function ComplaintDetail({
                 <textarea
                   value={newComment}
                   onChange={(e) => setNewComment(e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition resize-none"
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition resize-none"
                   placeholder="Tulis tanggapan atau pertanyaan Anda..."
                   rows={3}
                   disabled={submitting}

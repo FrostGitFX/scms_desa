@@ -12,6 +12,7 @@ import AdminComplaintDetail from './pages/AdminComplaintDetail';
 import StatisticsPage from './pages/StatisticsPage';
 import ProfilePage from './pages/ProfilePage';
 import SettingsPage from './pages/SettingsPage';
+import ResidentsPage from './pages/ResidentsPage';
 
 type Page =
   | 'landing'
@@ -40,10 +41,6 @@ function AppContent() {
       setPageData(data);
     }
   };
-
-  if (currentPage === 'profile') {
-  return <ProfilePage />;
-}
 
   if (loading) {
     return (
@@ -86,6 +83,9 @@ function AppContent() {
     if (currentPage === 'statistics') {
       return <StatisticsPage onNavigate={handleNavigate} />;
     }
+    if (currentPage === 'users') {
+      return <ResidentsPage onNavigate={handleNavigate} />;
+    }
     if (currentPage === 'all-complaints') {
       return <AdminDashboard onNavigate={handleNavigate} />;
     }
@@ -109,7 +109,6 @@ function AppContent() {
 
   return <UserDashboard onNavigate={handleNavigate} />;
 }
-
 
 function App() {
   return (

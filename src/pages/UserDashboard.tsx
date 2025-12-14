@@ -61,62 +61,62 @@ export default function UserDashboard({ onNavigate }: UserDashboardProps) {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <Navbar currentPage="dashboard" onNavigate={onNavigate} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Dashboard Warga</h1>
-          <p className="text-gray-600 mt-2">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Dashboard Warga</h1>
+          <p className="text-gray-600 dark:text-gray-400 mt-2">
             Kelola dan pantau laporan pengaduan Anda
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <div className="bg-white p-6 rounded-xl shadow-md border-l-4 border-blue-500">
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md border-l-4 border-blue-500">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600">Total Laporan</p>
-                <p className="text-3xl font-bold text-gray-900 mt-2">{stats.total}</p>
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Laporan</p>
+                <p className="text-3xl font-bold text-gray-900 dark:text-white mt-2">{stats.total}</p>
               </div>
               <FileText className="h-12 w-12 text-blue-500" />
             </div>
           </div>
 
-          <div className="bg-white p-6 rounded-xl shadow-md border-l-4 border-red-500">
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md border-l-4 border-red-500">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600">Menunggu</p>
-                <p className="text-3xl font-bold text-gray-900 mt-2">{stats.pending}</p>
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Menunggu</p>
+                <p className="text-3xl font-bold text-gray-900 dark:text-white mt-2">{stats.pending}</p>
               </div>
               <Clock className="h-12 w-12 text-red-500" />
             </div>
           </div>
 
-          <div className="bg-white p-6 rounded-xl shadow-md border-l-4 border-orange-500">
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md border-l-4 border-orange-500">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600">Diproses</p>
-                <p className="text-3xl font-bold text-gray-900 mt-2">{stats.inProgress}</p>
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Diproses</p>
+                <p className="text-3xl font-bold text-gray-900 dark:text-white mt-2">{stats.inProgress}</p>
               </div>
               <Clock className="h-12 w-12 text-orange-500" />
             </div>
           </div>
 
-          <div className="bg-white p-6 rounded-xl shadow-md border-l-4 border-green-500">
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md border-l-4 border-green-500">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600">Selesai</p>
-                <p className="text-3xl font-bold text-gray-900 mt-2">{stats.solved}</p>
+                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Selesai</p>
+                <p className="text-3xl font-bold text-gray-900 dark:text-white mt-2">{stats.solved}</p>
               </div>
               <CheckCircle className="h-12 w-12 text-green-500" />
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-xl shadow-md p-6">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
           <div className="flex justify-between items-center mb-6">
-            <h2 className="text-xl font-bold text-gray-900">Laporan Terbaru</h2>
+            <h2 className="text-xl font-bold text-gray-900 dark:text-white">Laporan Terbaru</h2>
             <button
               onClick={() => onNavigate('create-complaint')}
               className="flex items-center space-x-2 px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg font-medium transition shadow-md hover:shadow-lg"
@@ -129,12 +129,12 @@ export default function UserDashboard({ onNavigate }: UserDashboardProps) {
           {loading ? (
             <div className="text-center py-12">
               <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-500"></div>
-              <p className="text-gray-600 mt-4">Memuat data...</p>
+              <p className="text-gray-600 dark:text-gray-400 mt-4">Memuat data...</p>
             </div>
           ) : complaints.length === 0 ? (
             <div className="text-center py-12">
-              <FileText className="h-16 w-16 text-gray-300 mx-auto mb-4" />
-              <p className="text-gray-600 mb-4">Belum ada laporan</p>
+              <FileText className="h-16 w-16 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
+              <p className="text-gray-600 dark:text-gray-400 mb-4">Belum ada laporan</p>
               <button
                 onClick={() => onNavigate('create-complaint')}
                 className="px-6 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg font-medium transition"
@@ -144,42 +144,42 @@ export default function UserDashboard({ onNavigate }: UserDashboardProps) {
             </div>
           ) : (
             <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
+              <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                <thead className="bg-gray-50 dark:bg-gray-700">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                       Judul
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                       Kategori
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                       Prioritas
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                       Status
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                       Tanggal
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                       Aksi
                     </th>
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
+                <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                   {complaints.map((complaint) => (
-                    <tr key={complaint.id} className="hover:bg-gray-50">
+                    <tr key={complaint.id} className="hover:bg-gray-50 dark:hover:bg-gray-700">
                       <td className="px-6 py-4">
-                        <p className="text-sm font-medium text-gray-900">
+                        <p className="text-sm font-medium text-gray-900 dark:text-white">
                           {complaint.title}
                         </p>
-                        <p className="text-sm text-gray-500 truncate max-w-xs">
+                        <p className="text-sm text-gray-500 dark:text-gray-400 truncate max-w-xs">
                           {complaint.description}
                         </p>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <span className="text-sm text-gray-900">
+                        <span className="text-sm text-gray-900 dark:text-white">
                           {complaint.category}
                         </span>
                       </td>
@@ -189,13 +189,13 @@ export default function UserDashboard({ onNavigate }: UserDashboardProps) {
                       <td className="px-6 py-4 whitespace-nowrap">
                         <StatusBadge status={complaint.status} />
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
                         {formatDate(complaint.created_at)}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm">
                         <button
                           onClick={() => onNavigate('complaint-detail', complaint)}
-                          className="text-emerald-600 hover:text-emerald-900 font-medium"
+                          className="text-emerald-600 dark:text-emerald-400 hover:text-emerald-900 dark:hover:text-emerald-300 font-medium"
                         >
                           Detail
                         </button>
