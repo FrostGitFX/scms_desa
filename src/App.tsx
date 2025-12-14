@@ -41,6 +41,10 @@ function AppContent() {
     }
   };
 
+  if (currentPage === 'profile') {
+  return <ProfilePage />;
+}
+
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-100 dark:bg-gray-900 flex items-center justify-center">
@@ -105,6 +109,7 @@ function AppContent() {
 
   return <UserDashboard onNavigate={handleNavigate} />;
 }
+
 
 function App() {
   return (
