@@ -1,116 +1,124 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { ThemeProvider } from './contexts/ThemeContext';
 import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import UserDashboard from './pages/UserDashboard';
-import CreateComplaint from './pages/CreateComplaint';
-import ComplaintDetail from './pages/ComplaintDetail';
 import AdminDashboard from './pages/AdminDashboard';
-import AdminComplaintDetail from './pages/AdminComplaintDetail';
 import StatisticsPage from './pages/StatisticsPage';
-import ProfilePage from './pages/ProfilePage';
 import SettingsPage from './pages/SettingsPage';
-import ResidentsPage from './pages/ResidentsPage';
-
-type Page =
-  | 'landing'
-  | 'login'
-  | 'register'
-  | 'dashboard'
-  | 'create-complaint'
-  | 'complaint-detail'
-  | 'my-complaints'
-  | 'settings'
-  | 'profile'
-  | 'admin-dashboard'
-  | 'all-complaints'
-  | 'admin-complaint-detail'
-  | 'statistics'
-  | 'users';
+import UserProfilePage from './pages/UserProfilePage';
+import AdminProfilePage from './pages/AdminProfilePage';
 
 function AppContent() {
-  const { user, loading, isAdmin } = useAuth();
-  const [currentPage, setCurrentPage] = useState<Page>('landing');
-  const [pageData, setPageData] = useState<unknown>(null);
+  const { user, isAdmin, loading } = useAuth();
+  const [currentPage, setCurrentPage] = useState('landing');
+  const [selectedComplaintId, setSelectedComplaintId] = useState<string | null>(null);
 
-  const handleNavigate = (page: Page, data?: unknown) => {
+  useEffect(() => {
+    if (!loading && user) {
+      // Redirect to appropriate dashboard based on role
+      if (currentPage === 'landing' || currentPage === 'login' || currentPage === 'register') {
+        setCurrentPage(isAdmin ? 'admin-dashboard' : 'dashboard');
+      }
+    } else if (!loading && !user) {
+      // Redirect to landing if not authenticated
+      if (currentPage !== 'landing' && currentPage !== 'login' && currentPage !== 'register') {
+        setCurrentPage('landing');
+      }
+    }
+  }, [user, loading, isAdmin]);
+
+  const handleNavigate = (page: string, complaintId?: string) => {
     setCurrentPage(page);
-    if (data) {
-      setPageData(data);
+    if (complaintId) {
+      setSelectedComplaintId(complaintId);
     }
   };
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-100 dark:bg-gray-900 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center transition-colors duration-200">
         <div className="text-center">
           <div className="inline-block animate-spin rounded-full h-16 w-16 border-b-2 border-blue-500"></div>
-          <p className="text-gray-600 dark:text-gray-400 mt-4 text-lg">Memuat...</p>
+          <p className="text-gray-600 dark:text-gray-400 mt-4 text-lg">Memuat aplikasi...</p>
         </div>
       </div>
     );
   }
 
+  // Public pages
   if (!user) {
-    if (currentPage === 'register') {
-      return <RegisterPage onNavigate={handleNavigate} />;
+    switch (currentPage) {
+      case 'login':
+        return <LoginPage onNavigate={handleNavigate} />;
+      case 'register':
+        return <RegisterPage onNavigate={handleNavigate} />;
+      default:
+        return <LandingPage onNavigate={handleNavigate} />;
     }
-    if (currentPage === 'login') {
-      return <LoginPage onNavigate={handleNavigate} />;
-    }
-    return <LandingPage onNavigate={handleNavigate} />;
   }
 
+  // Profile page - role-based routing
   if (currentPage === 'profile') {
-    return <ProfilePage />;
+    return isAdmin
+      ? <AdminProfilePage onNavigate={handleNavigate} />
+      : <UserProfilePage onNavigate={handleNavigate} />;
   }
 
-  if (currentPage === 'settings') {
-    return <SettingsPage />;
-  }
-
+  // Admin pages
   if (isAdmin) {
-    if (currentPage === 'admin-complaint-detail' && pageData) {
-      return (
-        <AdminComplaintDetail
-          complaint={pageData as any}
+    switch (currentPage) {
+      case 'admin-dashboard':
+        return <AdminDashboard onNavigate={handleNavigate} />;
+      case 'all-complaints':
+        return <AllComplaintsPage onNavigate={handleNavigate} />;
+      case 'complaint-detail':
+        return selectedComplaintId ? (
+          <ComplaintDetailPage
+            complaintId={selectedComplaintId}
+            onNavigate={handleNavigate}
+          />
+        ) : (
+          <AdminDashboard onNavigate={handleNavigate} />
+        );
+      case 'statistics':
+        return <StatisticsPage onNavigate={handleNavigate} />;
+      case 'users':
+        return <UsersPage onNavigate={handleNavigate} />;
+      case 'settings':
+        return <SettingsPage onNavigate={handleNavigate} />;
+      default:
+        return <AdminDashboard onNavigate={handleNavigate} />;
+    }
+  }
+
+  // User pages
+  switch (currentPage) {
+    case 'dashboard':
+      return <UserDashboard onNavigate={handleNavigate} />;
+    case 'create-complaint':
+      return <CreateComplaintPage onNavigate={handleNavigate} />;
+    case 'my-complaints':
+      return <MyComplaintsPage onNavigate={handleNavigate} />;
+    case 'complaint-detail':
+      return selectedComplaintId ? (
+        <ComplaintDetailPage
+          complaintId={selectedComplaintId}
           onNavigate={handleNavigate}
         />
+      ) : (
+        <UserDashboard onNavigate={handleNavigate} />
       );
-    }
-    if (currentPage === 'statistics') {
-      return <StatisticsPage onNavigate={handleNavigate} />;
-    }
-    if (currentPage === 'users') {
-      return <ResidentsPage onNavigate={handleNavigate} />;
-    }
-    if (currentPage === 'all-complaints') {
-      return <AdminDashboard onNavigate={handleNavigate} />;
-    }
-    return <AdminDashboard onNavigate={handleNavigate} />;
+    case 'settings':
+      return <SettingsPage onNavigate={handleNavigate} />;
+    default:
+      return <UserDashboard onNavigate={handleNavigate} />;
   }
-
-  if (currentPage === 'create-complaint') {
-    return <CreateComplaint onNavigate={handleNavigate} />;
-  }
-  if (currentPage === 'complaint-detail' && pageData) {
-    return (
-      <ComplaintDetail complaint={pageData as any} onNavigate={handleNavigate} />
-    );
-  }
-  if (
-    currentPage === 'my-complaints' ||
-    currentPage === 'dashboard'
-  ) {
-    return <UserDashboard onNavigate={handleNavigate} />;
-  }
-
-  return <UserDashboard onNavigate={handleNavigate} />;
 }
 
-function App() {
+export default function App() {
   return (
     <ThemeProvider>
       <AuthProvider>
@@ -119,5 +127,3 @@ function App() {
     </ThemeProvider>
   );
 }
-
-export default App;
