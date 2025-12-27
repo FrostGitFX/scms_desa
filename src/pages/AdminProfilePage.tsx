@@ -167,7 +167,7 @@ export default function AdminProfilePage({ onNavigate }: AdminProfilePageProps) 
 
   if (!profile) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center transition-colors duration-200">
         <div className="text-center">
           <div className="inline-block animate-spin rounded-full h-16 w-16 border-b-2 border-blue-500"></div>
           <p className="text-gray-600 dark:text-gray-400 mt-4 text-lg">Memuat profil...</p>
@@ -209,7 +209,7 @@ export default function AdminProfilePage({ onNavigate }: AdminProfilePageProps) 
 
         {/* Admin Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-          <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-md border-l-4 border-blue-500">
+          <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-md border-l-4 border-blue-500 transition-colors duration-200">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-xs font-medium text-gray-600 dark:text-gray-400">Total Laporan</p>
@@ -219,7 +219,7 @@ export default function AdminProfilePage({ onNavigate }: AdminProfilePageProps) 
             </div>
           </div>
 
-          <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-md border-l-4 border-green-500">
+          <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-md border-l-4 border-green-500 transition-colors duration-200">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-xs font-medium text-gray-600 dark:text-gray-400">Diselesaikan</p>
@@ -229,7 +229,7 @@ export default function AdminProfilePage({ onNavigate }: AdminProfilePageProps) 
             </div>
           </div>
 
-          <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-md border-l-4 border-orange-500">
+          <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-md border-l-4 border-orange-500 transition-colors duration-200">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-xs font-medium text-gray-600 dark:text-gray-400">Menunggu</p>
@@ -239,7 +239,7 @@ export default function AdminProfilePage({ onNavigate }: AdminProfilePageProps) 
             </div>
           </div>
 
-          <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-md border-l-4 border-purple-500">
+          <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-md border-l-4 border-purple-500 transition-colors duration-200">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-xs font-medium text-gray-600 dark:text-gray-400">Total Warga</p>
@@ -325,7 +325,7 @@ export default function AdminProfilePage({ onNavigate }: AdminProfilePageProps) 
                   type="tel"
                   value={editData.phone}
                   onChange={(e) => setEditData({ ...editData, phone: e.target.value })}
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors duration-200"
                   placeholder="0812-3456-7890"
                 />
               ) : (
@@ -385,7 +385,7 @@ export default function AdminProfilePage({ onNavigate }: AdminProfilePageProps) 
                   <button
                     onClick={handleSave}
                     disabled={loading}
-                    className="flex-1 flex items-center justify-center space-x-2 px-6 py-3 bg-blue-500 hover:bg-blue-600 disabled:bg-gray-400 text-white rounded-lg font-semibold transition-all shadow-md hover:shadow-lg"
+                    className="flex-1 flex items-center justify-center space-x-2 px-6 py-3 bg-blue-500 hover:bg-blue-600 disabled:bg-gray-400 text-white rounded-lg font-semibold transition-all duration-200 shadow-md hover:shadow-lg"
                   >
                     <Save className="h-5 w-5" />
                     <span>{loading ? 'Menyimpan...' : 'Simpan Perubahan'}</span>
@@ -393,7 +393,7 @@ export default function AdminProfilePage({ onNavigate }: AdminProfilePageProps) 
                   <button
                     onClick={handleCancel}
                     disabled={loading}
-                    className="flex-1 px-6 py-3 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-900 dark:text-white rounded-lg font-semibold transition-all"
+                    className="flex-1 px-6 py-3 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-900 dark:text-white rounded-lg font-semibold transition-all duration-200"
                   >
                     Batal
                   </button>
@@ -401,7 +401,7 @@ export default function AdminProfilePage({ onNavigate }: AdminProfilePageProps) 
               ) : (
                 <button
                   onClick={() => setIsEditing(true)}
-                  className="w-full flex items-center justify-center space-x-2 px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-semibold transition-all shadow-md hover:shadow-lg"
+                  className="w-full flex items-center justify-center space-x-2 px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-semibold transition-all duration-200 shadow-md hover:shadow-lg"
                 >
                   <Edit2 className="h-5 w-5" />
                   <span>Edit Profil</span>

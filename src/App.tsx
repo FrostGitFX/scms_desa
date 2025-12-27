@@ -6,10 +6,17 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import UserDashboard from './pages/UserDashboard';
 import AdminDashboard from './pages/AdminDashboard';
-import StatisticsPage from './pages/StatisticsPage';
-import SettingsPage from './pages/SettingsPage';
 import UserProfilePage from './pages/UserProfilePage';
 import AdminProfilePage from './pages/AdminProfilePage';
+
+// Import pages yang ada saja - comment yang belum ada
+// import CreateComplaintPage from './pages/CreateComplaintPage';
+// import MyComplaintsPage from './pages/MyComplaintsPage';
+// import AllComplaintsPage from './pages/AllComplaintsPage';
+// import ComplaintDetailPage from './pages/ComplaintDetailPage';
+// import StatisticsPage from './pages/StatisticsPage';
+// import UsersPage from './pages/UsersPage';
+// import SettingsPage from './pages/SettingsPage';
 
 function AppContent() {
   const { user, isAdmin, loading } = useAuth();
@@ -72,23 +79,24 @@ function AppContent() {
     switch (currentPage) {
       case 'admin-dashboard':
         return <AdminDashboard onNavigate={handleNavigate} />;
-      case 'all-complaints':
-        return <AllComplaintsPage onNavigate={handleNavigate} />;
-      case 'complaint-detail':
-        return selectedComplaintId ? (
-          <ComplaintDetailPage
-            complaintId={selectedComplaintId}
-            onNavigate={handleNavigate}
-          />
-        ) : (
-          <AdminDashboard onNavigate={handleNavigate} />
-        );
-      case 'statistics':
-        return <StatisticsPage onNavigate={handleNavigate} />;
-      case 'users':
-        return <UsersPage onNavigate={handleNavigate} />;
-      case 'settings':
-        return <SettingsPage onNavigate={handleNavigate} />;
+      // Uncomment when you have these components
+      // case 'all-complaints':
+      //   return <AllComplaintsPage onNavigate={handleNavigate} />;
+      // case 'complaint-detail':
+      //   return selectedComplaintId ? (
+      //     <ComplaintDetailPage
+      //       complaintId={selectedComplaintId}
+      //       onNavigate={handleNavigate}
+      //     />
+      //   ) : (
+      //     <AdminDashboard onNavigate={handleNavigate} />
+      //   );
+      // case 'statistics':
+      //   return <StatisticsPage onNavigate={handleNavigate} />;
+      // case 'users':
+      //   return <UsersPage onNavigate={handleNavigate} />;
+      // case 'settings':
+      //   return <SettingsPage onNavigate={handleNavigate} />;
       default:
         return <AdminDashboard onNavigate={handleNavigate} />;
     }
@@ -98,21 +106,22 @@ function AppContent() {
   switch (currentPage) {
     case 'dashboard':
       return <UserDashboard onNavigate={handleNavigate} />;
-    case 'create-complaint':
-      return <CreateComplaintPage onNavigate={handleNavigate} />;
-    case 'my-complaints':
-      return <MyComplaintsPage onNavigate={handleNavigate} />;
-    case 'complaint-detail':
-      return selectedComplaintId ? (
-        <ComplaintDetailPage
-          complaintId={selectedComplaintId}
-          onNavigate={handleNavigate}
-        />
-      ) : (
-        <UserDashboard onNavigate={handleNavigate} />
-      );
-    case 'settings':
-      return <SettingsPage onNavigate={handleNavigate} />;
+    // Uncomment when you have these components
+    // case 'create-complaint':
+    //   return <CreateComplaintPage onNavigate={handleNavigate} />;
+    // case 'my-complaints':
+    //   return <MyComplaintsPage onNavigate={handleNavigate} />;
+    // case 'complaint-detail':
+    //   return selectedComplaintId ? (
+    //     <ComplaintDetailPage
+    //       complaintId={selectedComplaintId}
+    //       onNavigate={handleNavigate}
+    //     />
+    //   ) : (
+    //     <UserDashboard onNavigate={handleNavigate} />
+    //   );
+    // case 'settings':
+    //   return <SettingsPage onNavigate={handleNavigate} />;
     default:
       return <UserDashboard onNavigate={handleNavigate} />;
   }
